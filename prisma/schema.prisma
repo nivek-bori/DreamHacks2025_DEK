@@ -1,0 +1,23 @@
+generator client {
+  provider        = "prisma-client-js"
+  output          = "../lib/generated/prisma"
+  previewFeatures = ["relationJoins"]
+}
+
+datasource db {
+  provider  = "postgresql"
+  url       = env("DATABASE_URL")
+  directUrl = env("DIRECT_URL")
+}
+
+model User {
+  id         String  @unique
+  name       String  @unique
+  email      String  @unique
+
+  is_male    Boolean
+  b_month    Int
+  b_year     Int
+  
+  screenings Int[]   @default([])
+}
