@@ -25,13 +25,13 @@ export default function PasswordReset() {
 
 	return (
 		<div>
-			<form action="">
+			<form onSubmit={handleSubmit}>
 				<div>
 					<input type="text" value={newPassword} onChange={handleChange}/>
 				</div>
 				
 				<div>
-					<button onClick={handleSubmit}>Reset Password</button>
+					<button >Reset Password</button>
 				</div>
 			</form>
 

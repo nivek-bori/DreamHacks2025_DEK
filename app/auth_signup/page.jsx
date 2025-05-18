@@ -5,12 +5,18 @@ import { createClientComponentClient } from "@supabase/auth-helpers-nextjs";
 import { createUser } from "@/lib/database/server_db";
 
 export default function SignUp() {
-	const supabase = createClientComponentClient();
+	const supabase = createClientComponentClient({
+		cookieOptions: {
+			secure: process.env.production === true,
+			httpOnly: true,
+			sameSite: 'strict'
+		  }
+	});
 
 	const [status, setStatus] = useState(null);
 
 	const signUp = async (e) => {
-		console.log("SIGN UP INIT");
+		if (process.env.production === true) {console.log("SIGN UP INIT");}
 
 		const email = "kevinboriboonsomsin@gmail.com";
 		const pass = "fourty4thirty3";
@@ -39,11 +45,6 @@ export default function SignUp() {
 				setStatus(1);
 				return;
 			}
-
-			if (process.env.production === true) {
-				console.log("SIGN UP AUTH SUCESS");
-				console.log(authData.user.id);
-			}
 		} catch (e) {
 			if (process.env.production === true) {
 				console.log("SIGN UP AUTH ERROR");
@@ -55,12 +56,6 @@ export default function SignUp() {
 	
 		// Try db
 		try {
-			if (process.env.production === true) {
-				console.log("SIGN UP DATABASE INIT")
-				console.log(authData);
-				console.log(authData.user);
-				console.log(authData.user.id);
-			}
 			const user = await createUser({
 				id: authData.user.id,
 				name: name,
@@ -69,12 +64,11 @@ export default function SignUp() {
 				b_month: b_month,
 				b_year: b_year,
 			});
-	
-			if (process.env.production === true) {console.log("SIGN UP DATABASE");}
 			
 			if (user) {
 				setStatus(0);
 			} else {
+				if (process.env.production === true) {console.log("SIGN UP DB ERROR");}
 				setStatus(1);
 			}
 		} catch (e) {

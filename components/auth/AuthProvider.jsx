@@ -17,43 +17,67 @@ const AuthContext = createContext();
 // Listener of auth changes w/ context functionality
 export function AuthProvider({ children, initialSession }) {
 	const router = useRouter();
-	const supabase = createClientComponentClient();
+	const supabase = createClientComponentClient({
+        cookieOptions: {
+            secure: process.env.production === true,
+            httpOnly: true,
+            sameSite: 'strict'
+            }
+    });
 
     const [session, setSession] = useState(initialSession);
     const [user, setUser] = useState(initialSession?.user || null);
     const [loading, setLoading] = useState(true);
 
+    // Auth provider doesn't actually provide these functions - they are for refernce
+
 	const signUp = async (email, password, name, isMale, birthMonth, birthYear) => {
+        let authData;
         try {
-            const authSignUp = await supabase.auth.signUp({
-                email,
-                password,
+            const { data: retAuthData, error: authError } = await supabase.auth.signUp({
+                email: email, // formData.email
+                password: pass, // formData.password
                 options: {
                     emailRedirectTo: `${process.env.NEXT_PUBLIC_SITE_URL}/api/auth/callback`,
-                },
+                }
             });
+            authData = retAuthData;
     
-            if (authSignUp.error) { // Auth error
-                console.log("Auth signup error");
-                console.log(authSignUp.error);
-                return { status: 1, data: authSignUp.error };
-                // Depending on which error code it is, we could set status to something different
+            if (authError || !authData?.user) {
+                if (process.env.production === true) {console.log("SIGN UP AUTH ERROR A");}
+                return 1;
             }
-            if (!authSignUp?.user) {
-                return { status: 1, data: "Auth user does not exist"}
-            }
-    
-            const status = await createUser({
-                auth_id: authSignUp.user.id,
-                name: name,
-                is_male: isMale,
-                b_month: birthMonth,
-                b_year: birthYear,
-            });
-    
-            return status; 
         } catch (e) {
-            return { status: 1, data: e};
+            if (process.env.production === true) {
+                console.log("SIGN UP AUTH ERROR");
+                console.log(e.message);
+            }
+            return 1;
+        }
+    
+        // Try db
+        try {
+            const user = await createUser({
+                id: authData.user.id,
+                name: name,
+                email: email,
+                is_male: is_male,
+                b_month: b_month,
+                b_year: b_year,
+            });
+            
+            if (user) {
+                return 0;
+            } else {
+                if (process.env.production === true) {console.log("SIGN UP DB ERROR");}
+                return 1;
+            }
+        } catch (e) {
+            if (process.env.production === true) {
+                console.log("SIGN UP DB ERROR");
+                console.log(e.message);
+            }
+            return 1;
         }
     };
 
