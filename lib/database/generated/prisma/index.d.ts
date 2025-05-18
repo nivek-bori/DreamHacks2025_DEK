@@ -2079,7 +2079,7 @@ export namespace Prisma {
     b_month?: IntFilter<"User"> | number
     b_year?: IntFilter<"User"> | number
     appointments?: IntNullableListFilter<"User">
-  }, "id" | "name" | "email">
+  }, "id" | "id" | "name" | "email">
 
   export type UserOrderByWithAggregationInput = {
     id?: SortOrder

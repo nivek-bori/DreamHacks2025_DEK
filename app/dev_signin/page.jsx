@@ -77,7 +77,7 @@ export default function Signin() {
 				</div>
 				<div>
 					<button 
-						class="bg-c_green text-blue-800" 
+						className="bg-c_green text-blue-800" 
 						onClick={resetPassword}
 					>
 						Forgot your password?

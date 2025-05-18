@@ -7,10 +7,10 @@ import { createUser } from "@/lib/database/server_db";
 export default function SignUp() {
 	const supabase = createClientComponentClient();
 
-	const [signUpStatus, setSignUpStatus] = useState(null);
+	const [status, setStatus] = useState(null);
 
-	const signUpUser = async (e) => {
-		console.log("Function called");
+	const signUp = async (e) => {
+		console.log("SIGN UP INIT");
 
 		const email = "kevinboriboonsomsin@gmail.com";
 		const pass = "fourty4thirty3";
@@ -19,28 +19,50 @@ export default function SignUp() {
 		const b_month = 1;
 		const b_year = 1;
 
-		try {
-			// const { data: authData, error: authError } = await supabase.auth.signUp({
-			// 	email: email, // formData.email
-			// 	password: pass, // formData.password
-			// 	options: {
-			// 		emailRedirectTo: `${process.env.NEXT_PUBLIC_SITE_URL}/api/auth/callback`,
-			// 	}
-			// });
-	
-			// if (authError || !authData?.user) {
-			// 	console.log("Sign up auth error");
-			// 	setSignUpStatus(1);
-			// 	return;
-			// } else {
-			// 	console.log("Sign up auth successful: ", authData.user.id);
-			// }
+		// TODO: Verify data - pass > len 5, email is valid, etc
+		// Assign different status codes depending on which fields need to be fixed
 
-			const authData = { user: { id: "f79b90e2-e341-4f54-bf46-5d637f5c20a3" }};
+		// Try authentication
+		let authData;
+		try {
+			const { data: retAuthData, error: authError } = await supabase.auth.signUp({
+				email: email, // formData.email
+				password: pass, // formData.password
+				options: {
+					emailRedirectTo: `${process.env.NEXT_PUBLIC_SITE_URL}/api/auth/callback`,
+				}
+			});
+			authData = retAuthData;
 	
-			console.log("Sign up user id", authData.user.id);
-			const { data: dbData, status: dbStatus} = await createUser({
-				auth_id: authData.user.id,
+			if (authError || !authData?.user) {
+				if (process.env.production === true) {console.log("SIGN UP AUTH ERROR A");}
+				setStatus(1);
+				return;
+			}
+
+			if (process.env.production === true) {
+				console.log("SIGN UP AUTH SUCESS");
+				console.log(authData.user.id);
+			}
+		} catch (e) {
+			if (process.env.production === true) {
+				console.log("SIGN UP AUTH ERROR");
+				console.log(e.message);
+			}
+			setStatus(1);
+			return;
+		}
+	
+		// Try db
+		try {
+			if (process.env.production === true) {
+				console.log("SIGN UP DATABASE INIT")
+				console.log(authData);
+				console.log(authData.user);
+				console.log(authData.user.id);
+			}
+			const user = await createUser({
+				id: authData.user.id,
 				name: name,
 				email: email,
 				is_male: is_male,
@@ -48,28 +70,34 @@ export default function SignUp() {
 				b_year: b_year,
 			});
 	
-			console.log("Sign up database output", dbData, dbStatus)
-			if (dbStatus > 0) {
-				console.log("Sign up database error");
+			if (process.env.production === true) {console.log("SIGN UP DATABASE");}
+			
+			if (user) {
+				setStatus(0);
+			} else {
+				setStatus(1);
 			}
-			setSignUpStatus(dbStatus);
 		} catch (e) {
-			console.log("Sign up error", e.code, e.message);
-			setSignUpStatus(1);
+			if (process.env.production === true) {
+				console.log("SIGN UP DB ERROR");
+				console.log(e.message);
+			}
+			setStatus(1);
+			return;
 		}
 	}
 
 	return (
 		<div>
-			{(signUpStatus === 0) && (
+			{(status === 0) && (
 				<div>Sign up was successful!</div>
 			)}
 
-			{(signUpStatus > 0) && (
+			{(status > 0) && (
 				<div>There was an error with signing up</div>
 			)}
 
-			<button onClick={signUpUser}>
+			<button onClick={signUp}>
 				Sign up
 			</button>
 		</div>

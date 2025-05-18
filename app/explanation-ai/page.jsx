@@ -35,6 +35,7 @@ const styles = {
 
 export default function AIPage() {
 	const [messages, setMessages] = useState([]);
+	const [messageId, setMessageId] = useState(0);
 
     const [userMessage, setUserMessage] = useState("");
     const [loading, setLoading] = useState(false);
@@ -42,15 +43,19 @@ export default function AIPage() {
     const handleSubmit = async (e) => {
         e.preventDefault();
 		
-		const message = { role: 0, message: userMessage};
-        setLoading(true);
-		setUserMessage("");
-
+		// Add user message to chat
+		const message = { role: 0, messageId: messageId, message: userMessage};
 		setMessages(prevMessages => [...prevMessages, message]);
+        
+		setUserMessage("");
+		setMessageId(prevId => prevId + 1);
+		setLoading(true);
 
+		// Add ai message to chat
 		const aiResponse = { role: 1, message: await AIReponse(userMessage) };
 		setMessages(prevMessages => [...prevMessages, aiResponse]);
-
+		
+		setMessageId(prevId => prevId + 1);
 		setLoading(false);
     };
 

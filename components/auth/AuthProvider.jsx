@@ -3,7 +3,6 @@
 import { createContext, useContext, useEffect, useState } from "react";
 import { createClientComponentClient } from "@supabase/auth-helpers-nextjs";
 import { useRouter } from "next/navigation";
-import { createUser } from "@/lib/database/server_db";
 
 /* 
 	This is a wrapper around our whole website that allows components in the website to access auth data

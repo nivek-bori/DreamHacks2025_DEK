@@ -1,5 +1,6 @@
 import React from "react";
 import Link from "next/link";
+import "./globals.css";
 
 // This is a server component - no "use client" needed
 export default async function Home() {
