@@ -6,29 +6,33 @@
 		screening ai is explaining
 		user prompot
 */
+"use server";
 
 import React from "react";
-import axios from "axios";
 
-export default getAIResponse = async (user_message, previous_messages) => {
+export async function AIReponse(userMessage) {
     try {
-        const res = await axios.post(
-            'https://api.openai.com/v1/chat/completions',
-            {
-                model: 'gpt-3.5-turbo',
-                messages: [{ role: 'user', content: message }],
+        const res = await fetch("https://api.openai.com/v1/chat/completions", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+                Authorization: `Bearer ${process.env.OPENAI_API_KEY}`,
             },
-            {
-                headers: {
-                    'Content-Type': 'application/json',
-                    Authorization: `Bearer YOUR_OPENAI_API_KEY`, // 🚨 Do NOT commit this
-                },
-            }
-        );
-        
-        return { data: res.data.choices[0].message.content.trim(), error: 0};
-    } catch (err) {
-        console.error(err);
-        return { data: null, error: 1};
+            body: JSON.stringify({
+                model: "gpt-3.5-turbo",
+                messages: [{ role: "user", content: userMessage }],
+            }),
+        });
+
+        if (!res.ok) {
+            const error = await res.text();
+            return new Error(`OpenAI error: ${error}`);
+        }
+
+        const data = await res.json();
+        return data.choices[0].message.content.trim();
+    } catch (error) {
+        console.error(error);
+        return "Sorry, something went wrong.";
     }
-};
+}

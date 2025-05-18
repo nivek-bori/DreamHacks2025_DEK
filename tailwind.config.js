@@ -1,3 +1,4 @@
+
 import plugin from 'tailwindcss/plugin'
 
 const config = {
@@ -16,18 +17,13 @@ const config = {
                 click_green: "#016335",
                 c_beige: "#F9F4CB",
                 c_white: "#FFFFFF", 
-            },
-            
-            
-
-            textColor: {
+                //border
+                c_three: "#353535",
+                //textcolor
                 c_one: "#050505",
                 c_two: "#202020",
             },
-            border: {
-                c_one: "#353535",
-            },
-
+        
             fontSize: {
                 s_one: "2rem",
                 s_two: "1.125rem",
@@ -46,58 +42,60 @@ const config = {
     plugins: [
         require("@tailwindcss/typography"),
         plugin(function ({ addUtilities, theme }) {
-            const borderUtilities = {
-                ".border-overall": {
-                    borderWidth: theme("borderWidth.w_one"),
-                    borderColor: theme("border.c_one"),
-                    borderStyle: "solid",
+            // ...existing code...
+        const borderUtilities = {
+            ".border-overall": {
+                borderWidth: theme("borderWidth.w_one"),
+                borderColor: theme("colors.border_c_one"), // updated
+                borderStyle: "solid",
+            },
+            ".border-t": {
+                borderTopWidth: theme("borderWidth.w_one"),
+                borderTopColor: theme("colors.border_c_one"), // updated
+                borderTopStyle: "solid",
+            },
+            ".border-b": {
+                borderBottomWidth: theme("borderWidth.w_one"),
+                borderBottomColor: theme("colors.border_c_one"), // updated
+                borderBottomStyle: "solid",
+            },
+            ".border-l": {
+                borderLeftWidth: theme("borderWidth.w_one"),
+                borderLeftColor: theme("colors.border_c_one"), // updated
+                borderLeftStyle: "solid",
+            },
+            ".border-r": {
+                borderRightWidth: theme("borderWidth.w_one"),
+                borderRightColor: theme("colors.border_c_one"), // updated
+                borderRightStyle: "solid",
+            },
+        };
+        // ...existing code...
+        const scrollbarUtilities = {
+            ".scrollbar-hide": {
+                /* Firefox */
+                "scrollbar-width": "none",
+                /* Safari and Chrome */
+                "&::-webkit-scrollbar": {
+                    display: "none",
                 },
-                ".border-t": {
-                    borderTopWidth: theme("borderWidth.w_one"),
-                    borderTopColor: theme("border.c_one"),
-                    borderTopStyle: "solid",
+            },
+            ".scrollbar-thin": {
+                "scrollbar-width": "thin",
+                "&::-webkit-scrollbar": {
+                    width: "4px",
+                    height: "4px",
                 },
-                ".border-b": {
-                    borderBottomWidth: theme("borderWidth.w_one"),
-                    borderBottomColor: theme("border.c_one"),
-                    borderBottomStyle: "solid",
+                "&::-webkit-scrollbar-track": {
+                    background: "transparent",
                 },
-                ".border-l": {
-                    borderLeftWidth: theme("borderWidth.w_one"),
-                    borderLeftColor: theme("border.c_one"),
-                    borderLeftStyle: "solid",
+                "&::-webkit-scrollbar-thumb": {
+                    background: theme("colors.border_c_one"), // updated
+                    borderRadius: "20px",
                 },
-                ".border-r": {
-                    borderRightWidth: theme("borderWidth.w_one"),
-                    borderRightColor: theme("border.c_one"),
-                    borderRightStyle: "solid",
-                },
-            };
-
-            const scrollbarUtilities = {
-                ".scrollbar-hide": {
-                    /* Firefox */
-                    "scrollbar-width": "none",
-                    /* Safari and Chrome */
-                    "&::-webkit-scrollbar": {
-                        display: "none",
-                    },
-                },
-                ".scrollbar-thin": {
-                    "scrollbar-width": "thin",
-                    "&::-webkit-scrollbar": {
-                        width: "4px",
-                        height: "4px",
-                    },
-                    "&::-webkit-scrollbar-track": {
-                        background: "transparent",
-                    },
-                    "&::-webkit-scrollbar-thumb": {
-                        background: theme("border.c_one"),
-                        borderRadius: "20px",
-                    },
-                },
-            };
+            },
+        };
+// ...existing code...
 
             const timeBlockUtilities = {
                 ".day-block-height": {

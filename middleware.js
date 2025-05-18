@@ -15,7 +15,8 @@ export async function middleware(req) {
     } = await supabase.auth.getSession();
 
     // This allows log in, sign up, and maybe about us pages, etc to be accessed without authorization
-    const authRoutes = ["/timeline", "/profile"];
+    // const authRoutes = ["/timeline", "/profile"];
+    const authRoutes = [];
 
     const isProtectedRoute = authRoutes.some((route) => req.nextUrl.pathname.startsWith(route));
 	

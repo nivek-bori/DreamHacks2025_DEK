@@ -1,6 +1,6 @@
 generator client {
   provider        = "prisma-client-js"
-  output          = "../lib/generated/prisma"
+  output          = "../lib/database/generated/prisma"
   previewFeatures = ["relationJoins"]
 }
 
@@ -19,5 +19,5 @@ model User {
   b_month    Int
   b_year     Int
   
-  screenings Int[]   @default([])
+  appointments Int[]   @default([])
 }

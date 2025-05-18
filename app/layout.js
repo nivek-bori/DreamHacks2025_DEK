@@ -11,8 +11,8 @@ const inter = Inter({
 });
 
 export const metadata = {
-    title: "TODO WHAT IS OUR NAME???? AHHHHHHHHHHHHHHHH",
-    description: "Active Preventative Care",
+    title: "CareRemind",
+    description: "we dreammmm about tires",
 };
 
 export default async function RootLayout({ children }) {
