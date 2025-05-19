@@ -48,7 +48,7 @@ export default function SignUp() {
             return;
         }
 
-        signUp(e.email, e.password);
+        signUp(e.email, e.password, e.birthMonth, e.birthYear);
         // Actual DB stuff for other fields
 
         console.log("Final form data:", formData);

@@ -7,13 +7,14 @@
     "dev": "next dev --turbopack",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "css": "postcss app/globals.css -o app/processed-styles.css",
+    "dev:css": "postcss app/globals.css -o app/processed-styles.css --watch"
   },
   "dependencies": {
     "@prisma/client": "^6.8.2",
     "@supabase/auth-helpers-nextjs": "^0.10.0",
     "@supabase/supabase-js": "^2.49.4",
-    "@tailwindcss/typography": "^0.5.16",
     "axios": "^1.9.0",
     "clsx": "^2.1.1",
     "dotenv": "^16.5.0",
@@ -22,14 +23,17 @@
     "prisma": "^6.8.2",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
+    "react-router-dom": "^7.6.0",
     "tailwindcss": "^4.1.7",
     "tsconfig": "^7.0.0"
   },
   "devDependencies": {
     "@eslint/eslintrc": "^3",
     "@tailwindcss/postcss": "^4.1.7",
+    "@tailwindcss/typography": "^0.5.16",
     "autoprefixer": "^10.4.21",
     "eslint": "^9",
-    "eslint-config-next": "15.3.2"
+    "eslint-config-next": "15.3.2",
+    "postcss-cli": "^11.0.1"
   }
 }
