@@ -882,85 +882,53 @@ export namespace Prisma {
   }
 
   export type UserAvgAggregateOutputType = {
-    b_month: number | null
-    b_year: number | null
-    appointments: number | null
+    events: number | null
   }
 
   export type UserSumAggregateOutputType = {
-    b_month: number | null
-    b_year: number | null
-    appointments: number[]
+    events: number[]
   }
 
   export type UserMinAggregateOutputType = {
     id: string | null
-    name: string | null
     email: string | null
-    is_male: boolean | null
-    b_month: number | null
-    b_year: number | null
   }
 
   export type UserMaxAggregateOutputType = {
     id: string | null
-    name: string | null
     email: string | null
-    is_male: boolean | null
-    b_month: number | null
-    b_year: number | null
   }
 
   export type UserCountAggregateOutputType = {
     id: number
-    name: number
     email: number
-    is_male: number
-    b_month: number
-    b_year: number
-    appointments: number
+    events: number
     _all: number
   }
 
 
   export type UserAvgAggregateInputType = {
-    b_month?: true
-    b_year?: true
-    appointments?: true
+    events?: true
   }
 
   export type UserSumAggregateInputType = {
-    b_month?: true
-    b_year?: true
-    appointments?: true
+    events?: true
   }
 
   export type UserMinAggregateInputType = {
     id?: true
-    name?: true
     email?: true
-    is_male?: true
-    b_month?: true
-    b_year?: true
   }
 
   export type UserMaxAggregateInputType = {
     id?: true
-    name?: true
     email?: true
-    is_male?: true
-    b_month?: true
-    b_year?: true
   }
 
   export type UserCountAggregateInputType = {
     id?: true
-    name?: true
     email?: true
-    is_male?: true
-    b_month?: true
-    b_year?: true
-    appointments?: true
+    events?: true
     _all?: true
   }
 
@@ -1052,12 +1020,8 @@ export namespace Prisma {
 
   export type UserGroupByOutputType = {
     id: string
-    name: string
     email: string
-    is_male: boolean
-    b_month: number
-    b_year: number
-    appointments: number[]
+    events: number[]
     _count: UserCountAggregateOutputType | null
     _avg: UserAvgAggregateOutputType | null
     _sum: UserSumAggregateOutputType | null
@@ -1081,57 +1045,37 @@ export namespace Prisma {
 
   export type UserSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
-    name?: boolean
     email?: boolean
-    is_male?: boolean
-    b_month?: boolean
-    b_year?: boolean
-    appointments?: boolean
+    events?: boolean
   }, ExtArgs["result"]["user"]>
 
   export type UserSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
-    name?: boolean
     email?: boolean
-    is_male?: boolean
-    b_month?: boolean
-    b_year?: boolean
-    appointments?: boolean
+    events?: boolean
   }, ExtArgs["result"]["user"]>
 
   export type UserSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
-    name?: boolean
     email?: boolean
-    is_male?: boolean
-    b_month?: boolean
-    b_year?: boolean
-    appointments?: boolean
+    events?: boolean
   }, ExtArgs["result"]["user"]>
 
   export type UserSelectScalar = {
     id?: boolean
-    name?: boolean
     email?: boolean
-    is_male?: boolean
-    b_month?: boolean
-    b_year?: boolean
-    appointments?: boolean
+    events?: boolean
   }
 
-  export type UserOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "name" | "email" | "is_male" | "b_month" | "b_year" | "appointments", ExtArgs["result"]["user"]>
+  export type UserOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "email" | "events", ExtArgs["result"]["user"]>
 
   export type $UserPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     name: "User"
     objects: {}
     scalars: $Extensions.GetPayloadResult<{
       id: string
-      name: string
       email: string
-      is_male: boolean
-      b_month: number
-      b_year: number
-      appointments: number[]
+      events: number[]
     }, ExtArgs["result"]["user"]>
     composites: {}
   }
@@ -1556,12 +1500,8 @@ export namespace Prisma {
    */
   interface UserFieldRefs {
     readonly id: FieldRef<"User", 'String'>
-    readonly name: FieldRef<"User", 'String'>
     readonly email: FieldRef<"User", 'String'>
-    readonly is_male: FieldRef<"User", 'Boolean'>
-    readonly b_month: FieldRef<"User", 'Int'>
-    readonly b_year: FieldRef<"User", 'Int'>
-    readonly appointments: FieldRef<"User", 'Int[]'>
+    readonly events: FieldRef<"User", 'Int[]'>
   }
     
 
@@ -1953,12 +1893,8 @@ export namespace Prisma {
 
   export const UserScalarFieldEnum: {
     id: 'id',
-    name: 'name',
     email: 'email',
-    is_male: 'is_male',
-    b_month: 'b_month',
-    b_year: 'b_year',
-    appointments: 'appointments'
+    events: 'events'
   };
 
   export type UserScalarFieldEnum = (typeof UserScalarFieldEnum)[keyof typeof UserScalarFieldEnum]
@@ -2008,20 +1944,6 @@ export namespace Prisma {
 
 
   /**
-   * Reference to a field of type 'Boolean'
-   */
-  export type BooleanFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Boolean'>
-    
-
-
-  /**
-   * Reference to a field of type 'Int'
-   */
-  export type IntFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Int'>
-    
-
-
-  /**
    * Reference to a field of type 'Int[]'
    */
   export type ListIntFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Int[]'>
@@ -2029,16 +1951,9 @@ export namespace Prisma {
 
 
   /**
-   * Reference to a field of type 'Float'
+   * Reference to a field of type 'Int'
    */
-  export type FloatFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Float'>
-    
-
-
-  /**
-   * Reference to a field of type 'Float[]'
-   */
-  export type ListFloatFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Float[]'>
+  export type IntFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Int'>
     
   /**
    * Deep Input Types
@@ -2050,45 +1965,29 @@ export namespace Prisma {
     OR?: UserWhereInput[]
     NOT?: UserWhereInput | UserWhereInput[]
     id?: StringFilter<"User"> | string
-    name?: StringFilter<"User"> | string
     email?: StringFilter<"User"> | string
-    is_male?: BoolFilter<"User"> | boolean
-    b_month?: IntFilter<"User"> | number
-    b_year?: IntFilter<"User"> | number
-    appointments?: IntNullableListFilter<"User">
+    events?: IntNullableListFilter<"User">
   }
 
   export type UserOrderByWithRelationInput = {
     id?: SortOrder
-    name?: SortOrder
     email?: SortOrder
-    is_male?: SortOrder
-    b_month?: SortOrder
-    b_year?: SortOrder
-    appointments?: SortOrder
+    events?: SortOrder
   }
 
   export type UserWhereUniqueInput = Prisma.AtLeast<{
     id?: string
-    name?: string
     email?: string
     AND?: UserWhereInput | UserWhereInput[]
     OR?: UserWhereInput[]
     NOT?: UserWhereInput | UserWhereInput[]
-    is_male?: BoolFilter<"User"> | boolean
-    b_month?: IntFilter<"User"> | number
-    b_year?: IntFilter<"User"> | number
-    appointments?: IntNullableListFilter<"User">
-  }, "id" | "id" | "name" | "email">
+    events?: IntNullableListFilter<"User">
+  }, "id" | "id" | "email">
 
   export type UserOrderByWithAggregationInput = {
     id?: SortOrder
-    name?: SortOrder
     email?: SortOrder
-    is_male?: SortOrder
-    b_month?: SortOrder
-    b_year?: SortOrder
-    appointments?: SortOrder
+    events?: SortOrder
     _count?: UserCountOrderByAggregateInput
     _avg?: UserAvgOrderByAggregateInput
     _max?: UserMaxOrderByAggregateInput
@@ -2101,82 +2000,50 @@ export namespace Prisma {
     OR?: UserScalarWhereWithAggregatesInput[]
     NOT?: UserScalarWhereWithAggregatesInput | UserScalarWhereWithAggregatesInput[]
     id?: StringWithAggregatesFilter<"User"> | string
-    name?: StringWithAggregatesFilter<"User"> | string
     email?: StringWithAggregatesFilter<"User"> | string
-    is_male?: BoolWithAggregatesFilter<"User"> | boolean
-    b_month?: IntWithAggregatesFilter<"User"> | number
-    b_year?: IntWithAggregatesFilter<"User"> | number
-    appointments?: IntNullableListFilter<"User">
+    events?: IntNullableListFilter<"User">
   }
 
   export type UserCreateInput = {
     id: string
-    name: string
     email: string
-    is_male: boolean
-    b_month: number
-    b_year: number
-    appointments?: UserCreateappointmentsInput | number[]
+    events?: UserCreateeventsInput | number[]
   }
 
   export type UserUncheckedCreateInput = {
     id: string
-    name: string
     email: string
-    is_male: boolean
-    b_month: number
-    b_year: number
-    appointments?: UserCreateappointmentsInput | number[]
+    events?: UserCreateeventsInput | number[]
   }
 
   export type UserUpdateInput = {
     id?: StringFieldUpdateOperationsInput | string
-    name?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
-    is_male?: BoolFieldUpdateOperationsInput | boolean
-    b_month?: IntFieldUpdateOperationsInput | number
-    b_year?: IntFieldUpdateOperationsInput | number
-    appointments?: UserUpdateappointmentsInput | number[]
+    events?: UserUpdateeventsInput | number[]
   }
 
   export type UserUncheckedUpdateInput = {
     id?: StringFieldUpdateOperationsInput | string
-    name?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
-    is_male?: BoolFieldUpdateOperationsInput | boolean
-    b_month?: IntFieldUpdateOperationsInput | number
-    b_year?: IntFieldUpdateOperationsInput | number
-    appointments?: UserUpdateappointmentsInput | number[]
+    events?: UserUpdateeventsInput | number[]
   }
 
   export type UserCreateManyInput = {
     id: string
-    name: string
     email: string
-    is_male: boolean
-    b_month: number
-    b_year: number
-    appointments?: UserCreateappointmentsInput | number[]
+    events?: UserCreateeventsInput | number[]
   }
 
   export type UserUpdateManyMutationInput = {
     id?: StringFieldUpdateOperationsInput | string
-    name?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
-    is_male?: BoolFieldUpdateOperationsInput | boolean
-    b_month?: IntFieldUpdateOperationsInput | number
-    b_year?: IntFieldUpdateOperationsInput | number
-    appointments?: UserUpdateappointmentsInput | number[]
+    events?: UserUpdateeventsInput | number[]
   }
 
   export type UserUncheckedUpdateManyInput = {
     id?: StringFieldUpdateOperationsInput | string
-    name?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
-    is_male?: BoolFieldUpdateOperationsInput | boolean
-    b_month?: IntFieldUpdateOperationsInput | number
-    b_year?: IntFieldUpdateOperationsInput | number
-    appointments?: UserUpdateappointmentsInput | number[]
+    events?: UserUpdateeventsInput | number[]
   }
 
   export type StringFilter<$PrismaModel = never> = {
@@ -2194,22 +2061,6 @@ export namespace Prisma {
     not?: NestedStringFilter<$PrismaModel> | string
   }
 
-  export type BoolFilter<$PrismaModel = never> = {
-    equals?: boolean | BooleanFieldRefInput<$PrismaModel>
-    not?: NestedBoolFilter<$PrismaModel> | boolean
-  }
-
-  export type IntFilter<$PrismaModel = never> = {
-    equals?: number | IntFieldRefInput<$PrismaModel>
-    in?: number[] | ListIntFieldRefInput<$PrismaModel>
-    notIn?: number[] | ListIntFieldRefInput<$PrismaModel>
-    lt?: number | IntFieldRefInput<$PrismaModel>
-    lte?: number | IntFieldRefInput<$PrismaModel>
-    gt?: number | IntFieldRefInput<$PrismaModel>
-    gte?: number | IntFieldRefInput<$PrismaModel>
-    not?: NestedIntFilter<$PrismaModel> | number
-  }
-
   export type IntNullableListFilter<$PrismaModel = never> = {
     equals?: number[] | ListIntFieldRefInput<$PrismaModel> | null
     has?: number | IntFieldRefInput<$PrismaModel> | null
@@ -2220,42 +2071,26 @@ export namespace Prisma {
 
   export type UserCountOrderByAggregateInput = {
     id?: SortOrder
-    name?: SortOrder
     email?: SortOrder
-    is_male?: SortOrder
-    b_month?: SortOrder
-    b_year?: SortOrder
-    appointments?: SortOrder
+    events?: SortOrder
   }
 
   export type UserAvgOrderByAggregateInput = {
-    b_month?: SortOrder
-    b_year?: SortOrder
-    appointments?: SortOrder
+    events?: SortOrder
   }
 
   export type UserMaxOrderByAggregateInput = {
     id?: SortOrder
-    name?: SortOrder
     email?: SortOrder
-    is_male?: SortOrder
-    b_month?: SortOrder
-    b_year?: SortOrder
   }
 
   export type UserMinOrderByAggregateInput = {
     id?: SortOrder
-    name?: SortOrder
     email?: SortOrder
-    is_male?: SortOrder
-    b_month?: SortOrder
-    b_year?: SortOrder
   }
 
   export type UserSumOrderByAggregateInput = {
-    b_month?: SortOrder
-    b_year?: SortOrder
-    appointments?: SortOrder
+    events?: SortOrder
   }
 
   export type StringWithAggregatesFilter<$PrismaModel = never> = {
@@ -2276,31 +2111,7 @@ export namespace Prisma {
     _max?: NestedStringFilter<$PrismaModel>
   }
 
-  export type BoolWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: boolean | BooleanFieldRefInput<$PrismaModel>
-    not?: NestedBoolWithAggregatesFilter<$PrismaModel> | boolean
-    _count?: NestedIntFilter<$PrismaModel>
-    _min?: NestedBoolFilter<$PrismaModel>
-    _max?: NestedBoolFilter<$PrismaModel>
-  }
-
-  export type IntWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: number | IntFieldRefInput<$PrismaModel>
-    in?: number[] | ListIntFieldRefInput<$PrismaModel>
-    notIn?: number[] | ListIntFieldRefInput<$PrismaModel>
-    lt?: number | IntFieldRefInput<$PrismaModel>
-    lte?: number | IntFieldRefInput<$PrismaModel>
-    gt?: number | IntFieldRefInput<$PrismaModel>
-    gte?: number | IntFieldRefInput<$PrismaModel>
-    not?: NestedIntWithAggregatesFilter<$PrismaModel> | number
-    _count?: NestedIntFilter<$PrismaModel>
-    _avg?: NestedFloatFilter<$PrismaModel>
-    _sum?: NestedIntFilter<$PrismaModel>
-    _min?: NestedIntFilter<$PrismaModel>
-    _max?: NestedIntFilter<$PrismaModel>
-  }
-
-  export type UserCreateappointmentsInput = {
+  export type UserCreateeventsInput = {
     set: number[]
   }
 
@@ -2308,19 +2119,7 @@ export namespace Prisma {
     set?: string
   }
 
-  export type BoolFieldUpdateOperationsInput = {
-    set?: boolean
-  }
-
-  export type IntFieldUpdateOperationsInput = {
-    set?: number
-    increment?: number
-    decrement?: number
-    multiply?: number
-    divide?: number
-  }
-
-  export type UserUpdateappointmentsInput = {
+  export type UserUpdateeventsInput = {
     set?: number[]
     push?: number | number[]
   }
@@ -2337,22 +2136,6 @@ export namespace Prisma {
     startsWith?: string | StringFieldRefInput<$PrismaModel>
     endsWith?: string | StringFieldRefInput<$PrismaModel>
     not?: NestedStringFilter<$PrismaModel> | string
-  }
-
-  export type NestedBoolFilter<$PrismaModel = never> = {
-    equals?: boolean | BooleanFieldRefInput<$PrismaModel>
-    not?: NestedBoolFilter<$PrismaModel> | boolean
-  }
-
-  export type NestedIntFilter<$PrismaModel = never> = {
-    equals?: number | IntFieldRefInput<$PrismaModel>
-    in?: number[] | ListIntFieldRefInput<$PrismaModel>
-    notIn?: number[] | ListIntFieldRefInput<$PrismaModel>
-    lt?: number | IntFieldRefInput<$PrismaModel>
-    lte?: number | IntFieldRefInput<$PrismaModel>
-    gt?: number | IntFieldRefInput<$PrismaModel>
-    gte?: number | IntFieldRefInput<$PrismaModel>
-    not?: NestedIntFilter<$PrismaModel> | number
   }
 
   export type NestedStringWithAggregatesFilter<$PrismaModel = never> = {
@@ -2372,15 +2155,7 @@ export namespace Prisma {
     _max?: NestedStringFilter<$PrismaModel>
   }
 
-  export type NestedBoolWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: boolean | BooleanFieldRefInput<$PrismaModel>
-    not?: NestedBoolWithAggregatesFilter<$PrismaModel> | boolean
-    _count?: NestedIntFilter<$PrismaModel>
-    _min?: NestedBoolFilter<$PrismaModel>
-    _max?: NestedBoolFilter<$PrismaModel>
-  }
-
-  export type NestedIntWithAggregatesFilter<$PrismaModel = never> = {
+  export type NestedIntFilter<$PrismaModel = never> = {
     equals?: number | IntFieldRefInput<$PrismaModel>
     in?: number[] | ListIntFieldRefInput<$PrismaModel>
     notIn?: number[] | ListIntFieldRefInput<$PrismaModel>
@@ -2388,23 +2163,7 @@ export namespace Prisma {
     lte?: number | IntFieldRefInput<$PrismaModel>
     gt?: number | IntFieldRefInput<$PrismaModel>
     gte?: number | IntFieldRefInput<$PrismaModel>
-    not?: NestedIntWithAggregatesFilter<$PrismaModel> | number
-    _count?: NestedIntFilter<$PrismaModel>
-    _avg?: NestedFloatFilter<$PrismaModel>
-    _sum?: NestedIntFilter<$PrismaModel>
-    _min?: NestedIntFilter<$PrismaModel>
-    _max?: NestedIntFilter<$PrismaModel>
-  }
-
-  export type NestedFloatFilter<$PrismaModel = never> = {
-    equals?: number | FloatFieldRefInput<$PrismaModel>
-    in?: number[] | ListFloatFieldRefInput<$PrismaModel>
-    notIn?: number[] | ListFloatFieldRefInput<$PrismaModel>
-    lt?: number | FloatFieldRefInput<$PrismaModel>
-    lte?: number | FloatFieldRefInput<$PrismaModel>
-    gt?: number | FloatFieldRefInput<$PrismaModel>
-    gte?: number | FloatFieldRefInput<$PrismaModel>
-    not?: NestedFloatFilter<$PrismaModel> | number
+    not?: NestedIntFilter<$PrismaModel> | number
   }
 
 

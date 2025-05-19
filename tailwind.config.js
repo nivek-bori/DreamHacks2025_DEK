@@ -6,6 +6,8 @@
         gray: "#f9f9f9",
         white: "#f7f7f7",
         purple: "#98479a",
+
+        error_red: "#e33f3f",
     },
     textColor: {
         c_purple: "#98479a",

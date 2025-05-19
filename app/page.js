@@ -2,17 +2,29 @@
 
 import React from "react";
 import { Link } from "next/link";
+import { useRouter } from "next/navigation";
 
 export default function App() {
+  const router = useRouter();
+
+  const handleClick = (e) => {
+    router.push("/auth_signup");
+  }
+
     return (
         <>
-            <div className="main-content">
-                <h1 className="text-3xl font-bold underline">
-                    Welcome to CareRemind, <br />
-                    your health companion!
+            <div className="flex flex-col items-center justify-center h-screen main-content">
+                <img src="/logo.png" width={300} height={300} className="logo" alt="CareRe"  />
+                <h1 className="text-3xl text-[#98479a] font-bold text-center mt-8">
+                    Welcome to CareRemind! <br />
+                    Your health, on time<br />
                 </h1>
+                <button onClick={handleClick} 
+                  className="w-1/4 py-2 text-white text-[1.5rem] font-semibold rounded-[2rem] bg-[#008044] hover:bg-[#016335] transition-colors duration-300 mt-8">
+                  Sign Up Now!
+                </button>
             </div>
-
+           
             {/*THIS IS AN EXAMPLE OF A BUTTON
       <div>
         <button className="px-4 py-2 font-bold text-green-700 bg-white rounded">

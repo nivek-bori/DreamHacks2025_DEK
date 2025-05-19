@@ -3,7 +3,6 @@
 import React from "react";
 import clsx from "clsx";
 import { useEffect, useState } from "react";
-import AIResponse from "@/lib/explanation/ai";
 
 import { AIReponse } from "@/lib/explanation/ai";
 
@@ -23,37 +22,16 @@ const styles = {
     },
     userMessage: {
         alignSelf: 'flex-end',
-        backgroundColor: '#d1e7dd',
+        backgroundColor: '#eeecda',
         color: '#0f5132',
         borderBottomRightRadius: 0
     },
     assistantMessage: {
         alignSelf: 'flex-start',
-        backgroundColor: '#e2e3e5',
+        backgroundColor: '#eeecda',
         color: '#41464b',
         borderBottomLeftRadius: 0
     },
-    message: {
-        maxWidth: "60%",
-        padding: "10px 15px",
-        borderRadius: "12px",
-        margin: "5px 0",
-        wordWrap: "break-word",
-    },
-    user: {
-        alignSelf: "flex-end",
-        backgroundColor: "#dcf8c6",
-        textAlign: "right",
-    },
-    ai: {
-        alignSelf: "flex-start",
-        backgroundColor: "#f1f0f0",
-        textAlign: "left",
-    },
-    textBox: {
-        alignSelf: "flex-center",
-        textAlign: ""
-    }
 };
 
 export default function AIPage() {
@@ -92,33 +70,59 @@ export default function AIPage() {
 
     return (
         <div>
-            <form onSubmit={handleSubmit}>
-                <div style={{fontSize:"2rem", margin:"5px"}}>
-                    Ask us anything!
-                </div>
-                <div>
-                    <input style={{width: "300px", padding: "5px"}} type="text" value={userMessage} placeholder="i.e. What is the meaning of life?" onChange={(e) => setUserMessage(e.target.value)} required />
-                </div>
-                <button type="button" disabled={loading} onClick={handleSubmit} style={{
-                    margin:"5px",
-                    backgroundColor: "white",
-                    color:"black",
-                    fontWeight:"bold",
-                    boxShadow:"0 4px 6px rgba(0,0,0,0.1)",
-                    cursor:"pointer",
-                    transition:"all 0.2s ease-in-out",
-
-                    }}>
-                    {loading ? "Loading..." : "Ask"}
-                </button>
-            </form>
+            <div
+                style={{
+                display: "flex",
+                flexDirection: "column",
+                alignItems: "center",
+                justifyContent: "center",
+                height: "20vh", // or adjust based on layout
+                }}>
+                <form onSubmit={handleSubmit}>
+                    <div style={{
+                        fontSize:"2rem",
+                        margin:"5px",
+                        fontFamily:"Helvetica",
+                        fontWeight:"bold",
+                        color:"#98479a",
+                        }}>
+                        ASK US ANYTHING
+                    </div>
+                    <div>
+                        <input style={{
+                            width: "300px", 
+                            padding: "5px", 
+                            margin:"5px",
+                            backgroundColor:"#eeecda",
+                            border:"none",
+                            borderRadius:"12px",
+                            }} 
+                            type="text" value={userMessage} placeholder="i.e. Explain this screening." onChange={(e) => setUserMessage(e.target.value)} required />
+                    </div>
+                    <button type="button" disabled={loading} onClick={handleSubmit} style={{
+                        margin:"5px",
+                        padding:"0.4rem",
+                        border:"none",
+                        borderRadius:"12px",
+                        backgroundColor: "#008044",
+                        color:"white",
+                        fontWeight:"bold",
+                        boxShadow:"0 4px 6px rgba(0,0,0,0.1)",
+                        cursor:"pointer",
+                        transition:"all 0.2s ease-in-out",
+                        width: "300px",
+                        }}>
+                        {loading ? "Loading..." : "Ask"}
+                    </button>
+                </form>
+            </div>
 
             <div style={styles.chatContainer}>
 				{/* The chatbot system */}
 				{messages.map((message, index) => (
-					<div key={index} style={styles.chatBubble, (message.role === 0) ? styles.userMessage : styles.aiResponse}>
-                            <strong>{(message.role === 0) ? "You: " : "Assistant: "}</strong> {message.message}
-                    </div>
+					 <div key={index} style={{...styles.chatBubble, ...(message.role === 0) ? styles.userMessage : styles.assistantMessage}}>
+                             <strong>{(message.role === 0) ? "You: " : "Assistant: "}</strong> {message.message}
+                     </div>
 				))}
             </div>
         </div>

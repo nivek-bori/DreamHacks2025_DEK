@@ -27,9 +27,9 @@ export async function middleware(req) {
     }
 
 	// If user is authenticated, redirect away from log in or sign up
-    if (session && (req.nextUrl.pathname === "/signin" || req.nextUrl.pathname === "/signup")) {
-        return NextResponse.redirect(new URL("/timeline", req.url));
-    }
+    // if (session && (req.nextUrl.pathname === "/signin" || req.nextUrl.pathname === "/signup")) {
+    //     return NextResponse.redirect(new URL("/timeline", req.url));
+    // }
 
     return res;
 }

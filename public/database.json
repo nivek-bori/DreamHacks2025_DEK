@@ -1,0 +1,73 @@
+[
+	{
+	  "id": 1,
+	  "name": "Type 2 Diabetes Screening",
+	  "description": "Fasting plasma glucose or HbA1c test for early detection.",
+	  "gender": null,
+	  "age_min": 180,
+	  "age_max": null,
+	  "frequency": 12,
+	  "conditions": []
+	},
+	{
+	  "id": 2,
+	  "name": "Diabetic Eye Exam",
+	  "description": "Comprehensive dilated retinal exam.",
+	  "gender": null,
+	  "age_min": 0,
+	  "age_max": null,
+	  "frequency": 6,
+	  "conditions": ["diabetic"]
+	},
+	{
+	  "id": 3,
+	  "name": "Mammogram",
+	  "description": "Digital mammography for breast cancer screening.",
+	  "gender": false,
+	  "age_min": 540,
+	  "age_max": null,
+	  "frequency": 24,
+	  "conditions": []
+	},
+	{
+	  "id": 4,
+	  "name": "Prostate Cancer Screening (PSA)",
+	  "description": "Prostate-specific antigen blood test.",
+	  "gender": true,
+	  "age_min": 600,
+	  "age_max": null,
+	  "frequency": 12,
+	  "conditions": []
+	},
+	{
+	  "id": 5,
+	  "name": "Colorectal Cancer Screening (Colonoscopy)",
+	  "description": "Colonoscopy for adults at average risk.",
+	  "gender": null,
+	  "age_min": 600,
+	  "age_max": null,
+	  "frequency": 120,
+	  "conditions": []
+	},
+	{
+	  "id": 6,
+	  "name": "Lipid Panel",
+	  "description": "Cholesterol and triglyceride measurement.",
+	  "gender": null,
+	  "age_min": 240,
+	  "age_max": null,
+	  "frequency": 60,
+	  "conditions": []
+	},
+	{
+	  "id": 7,
+	  "name": "Asthma Management Review",
+	  "description": "Spirometry and treatment plan assessment.",
+	  "gender": null,
+	  "age_min": 0,
+	  "age_max": null,
+	  "frequency": 12,
+	  "conditions": ["asthma"]
+	}
+  ]
+  

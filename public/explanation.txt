@@ -1,2 +1,0 @@
-This is where all the images and stuff go
-Try not to put images in here bc loading images is expensive and will make load time slow
